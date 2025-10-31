@@ -4,6 +4,7 @@ import VerseCard from '../components/verses/VerseCard';
 import FilterPanel from '../components/filters/FilterPanel';
 import KeyboardShortcutsDialog from '../components/ui/KeyboardShortcutsDialog';
 import { useVerses } from '../hooks/useVerses';
+import { loadMandala } from '../utils/verseLoader';
 import { useSearch } from '../hooks/useSearch';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useUIStore } from '../store/uiStore';
@@ -23,7 +24,20 @@ interface Filters {
 const Explore = () => {
   const { verses, loading, error } = useVerses();
   const [currentFilters, setCurrentFilters] = useState<Filters>({});
-  const { results, setQuery, history, clearHistory } = useSearch(verses);
+
+  // When a single mandala is selected, we may lazily load just that mandala
+  // to avoid requiring the entire dataset up-front.
+  const [mandalaVerses, setMandalaVerses] = useState<VerseData[]>([]);
+  const [loadingMandala, setLoadingMandala] = useState<number | null>(null);
+
+  // Source verses for searching and filtering: if a mandala filter is set and
+  // we've loaded that mandala, prefer those verses. Otherwise fall back to the
+  // global `verses` array (which may be empty until full load completes).
+  const sourceAllVerses = currentFilters.mandala
+    ? (mandalaVerses.length > 0 ? mandalaVerses : verses)
+    : verses;
+
+  const { results, setQuery, history, clearHistory } = useSearch(sourceAllVerses);
   const { sidebarOpen, setSidebarOpen, filtersOpen, setFiltersOpen } = useUIStore();
   const [focusedVerseIndex, setFocusedVerseIndex] = useState(0);
   const [showShortcuts, setShowShortcuts] = useState(false);
@@ -38,8 +52,29 @@ const Explore = () => {
     }
   }, [currentFilters.search, setQuery]);
 
+  // Load a single mandala when the mandala filter changes
+  useEffect(() => {
+    const m = currentFilters.mandala;
+    if (!m) {
+      setMandalaVerses([]);
+      setLoadingMandala(null);
+      return;
+    }
+    let mounted = true;
+    setLoadingMandala(m);
+    loadMandala(m).then(data => {
+      if (!mounted) return;
+      setMandalaVerses(data || []);
+      setLoadingMandala(null);
+    }).catch(err => {
+      console.warn(`Failed to load mandala ${m}:`, err);
+      if (mounted) setLoadingMandala(null);
+    });
+    return () => { mounted = false; };
+  }, [currentFilters.mandala]);
+
   // Filter verses based on all criteria
-  const filteredVerses = (currentFilters.search && results.length > 0 ? results : verses).filter((v: VerseData) => {
+  const filteredVerses = (currentFilters.search && results.length > 0 ? results : sourceAllVerses).filter((v: VerseData) => {
     if (currentFilters.mandala && v.mandala !== currentFilters.mandala) return false;
     if (currentFilters.sukta && v.sukta !== currentFilters.sukta) return false;
     if (currentFilters.deity && v.metadata?.deity?.primary !== currentFilters.deity) return false;
@@ -134,7 +169,7 @@ const Explore = () => {
       <div className="min-h-screen bg-gradient-to-b from-vedic-ui via-vedic-bg to-vedic-ui py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-reading mb-6 md:mb-8 font-bold text-vedic-text">Explore the Verses</h1>
-          <FilterPanel allVerses={verses} currentFilters={currentFilters} onFilterChange={setCurrentFilters} />
+          <FilterPanel allVerses={sourceAllVerses} currentFilters={currentFilters} onFilterChange={setCurrentFilters} />
 
           {/* Search History */}
           {history.length > 0 && (
@@ -162,7 +197,7 @@ const Explore = () => {
             </div>
           )}
 
-          {loading && (
+          {( (loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala) ) && (
             <div className="text-center text-xl py-8 text-vedic-text">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
               <p className="mt-4">Loading verses...</p>
@@ -175,10 +210,10 @@ const Explore = () => {
             </div>
           )}
 
-          {!loading && !error && (
+          {!((loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala)) && !error && (
             <>
               <div className="mb-4 text-sm text-muted-foreground">
-                Showing {filteredVerses.length} of {verses.length} verses
+                Showing {filteredVerses.length} of {sourceAllVerses.length} verses
               </div>
               <div className="space-y-6">
                 {filteredVerses.length > 0 ? (

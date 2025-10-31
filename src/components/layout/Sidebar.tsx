@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUIStore } from '../../store/uiStore';
 import { useVerses } from '../../hooks/useVerses';
+import { loadMandala } from '../../utils/verseLoader';
 import type { VerseData } from '../../store/verseStore';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,28 +11,67 @@ const Sidebar: React.FC = () => {
   const { sidebarOpen, setSidebarOpen } = useUIStore();
   const { verses } = useVerses();
 
+  // simple in-memory ref cache so loads don't trigger rerenders on every fetch
+  const mandalaDataRef = React.useRef<Record<number, VerseData[]>>({});
+
+  // Tree is either built from the globally-loaded `verses` or from per-mandala
+  // data loaded lazily. When verses exist (app loaded full dataset), prefer
+  // building the tree from that. Otherwise we'll fill `mandalaData` on demand.
   const tree = React.useMemo(() => {
     const m = new Map<number, Map<number, VerseData[]>>();
-    verses.forEach((v: VerseData) => {
-      const mandala = v.mandala || 0;
-      const sukta = v.sukta || 0;
-      if (!m.has(mandala)) m.set(mandala, new Map());
-      const sMap = m.get(mandala)!;
-      if (!sMap.has(sukta)) sMap.set(sukta, []);
-      sMap.get(sukta)!.push(v);
-    });
+    if (verses && verses.length > 0) {
+      verses.forEach((v: VerseData) => {
+        const mandala = v.mandala || 0;
+        const sukta = v.sukta || 0;
+        if (!m.has(mandala)) m.set(mandala, new Map());
+        const sMap = m.get(mandala)!;
+        if (!sMap.has(sukta)) sMap.set(sukta, []);
+        sMap.get(sukta)!.push(v);
+      });
+    } else {
+      // Ensure mandalas 1..10 exist even when verses array not loaded
+      for (let mi = 1; mi <= 10; mi++) {
+        if (!m.has(mi)) m.set(mi, new Map());
+        const sMap = m.get(mi)!;
+        // if we have mandalaData for this mandala, populate suktas
+        const loaded = mandalaDataRef.current[mi];
+        if (loaded) {
+          loaded.forEach((v: VerseData) => {
+            const sukta = v.sukta || 0;
+            if (!sMap.has(sukta)) sMap.set(sukta, []);
+            sMap.get(sukta)!.push(v);
+          });
+        }
+      }
+    }
     return m;
   }, [verses]);
 
   const [activeMandala, setActiveMandala] = React.useState<number | null>(null);
   const [activeSukta, setActiveSukta] = React.useState<{ mandala: number; sukta: number } | null>(null);
+  const [loadingMandala, setLoadingMandala] = React.useState<number | null>(null);
 
   // refs for keyboard navigation
   const mandalaButtons = React.useRef<Array<HTMLButtonElement | null>>([]);
 
   const toggleMandala = (m: number) => {
     setActiveSukta(null);
+    const willOpen = activeMandala !== m;
     setActiveMandala(prev => (prev === m ? null : m));
+
+    // If opening and we don't have data yet, fetch it lazily
+    if (willOpen && (!mandalaDataRef.current[m] || mandalaDataRef.current[m].length === 0)) {
+      setLoadingMandala(m);
+      loadMandala(m).then(data => {
+        mandalaDataRef.current[m] = data;
+        setLoadingMandala(null);
+        // trigger a re-render by updating activeMandala (no-op) or using state
+        setActiveMandala(x => x);
+      }).catch(err => {
+        console.warn(`Failed to load mandala ${m}:`, err);
+        setLoadingMandala(null);
+      });
+    }
   };
 
   const toggleSukta = (mandala: number, sukta: number) => {
@@ -228,11 +268,14 @@ const Sidebar: React.FC = () => {
                             className="mt-2 pl-4"
                             data-mandala={mandala}
                           >
-                            {Array.from(sMap.keys()).sort((a, b) => a - b).map(sukta => {
-                              const versesList = sMap.get(sukta)!.sort((a, b) => a.verse - b.verse);
-                              const isSuktaOpen = activeSukta?.mandala === mandala && activeSukta?.sukta === sukta;
-                              return (
-                                <div key={sukta} className="mb-2">
+                              {loadingMandala === mandala ? (
+                                <div className="py-4 text-center text-muted-foreground">Loading mandala…</div>
+                              ) : (
+                                Array.from(sMap.keys()).sort((a, b) => a - b).map(sukta => {
+                                  const versesList = sMap.get(sukta)!.sort((a, b) => a.verse - b.verse);
+                                  const isSuktaOpen = activeSukta?.mandala === mandala && activeSukta?.sukta === sukta;
+                                  return (
+                                    <div key={sukta} className="mb-2">
                                   <button
                                     data-sukta={sukta}
                                     role="treeitem"
@@ -273,7 +316,8 @@ const Sidebar: React.FC = () => {
                                   </AnimatePresence>
                                 </div>
                               );
-                            })}
+                                })
+                              )}
                           </motion.div>
                         )}
                       </AnimatePresence>

@@ -17,6 +17,16 @@ module.exports = {
           text: 'rgb(var(--color-vedic-text-rgb) / <alpha-value>)',
           ui: 'rgb(var(--color-vedic-ui-rgb) / <alpha-value>)',
           accent: 'rgb(var(--color-vedic-accent-rgb) / <alpha-value>)',
+          // Additional semantic colors
+          sage: 'rgb(var(--color-vedic-sage-rgb) / <alpha-value>)',
+          cream: 'rgb(var(--color-vedic-cream-rgb) / <alpha-value>)',
+          slate: 'rgb(var(--color-vedic-slate-rgb) / <alpha-value>)',
+          charcoal: 'rgb(var(--color-vedic-charcoal-rgb) / <alpha-value>)',
+          // Deity-specific colors for Learn page
+          agni: '#D97706',      // amber-600 - fire
+          gold: '#F59E0B',      // amber-500 - golden
+          soma: '#8B5CF6',      // violet-500 - mystical
+          ushas: '#EC4899',     // pink-500 - dawn
         },
         // shadcn/ui compatible tokens
         border: 'hsl(var(--border))',
