@@ -2,8 +2,10 @@ import React from 'react';
 import { Search, X, Filter } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
+import type { VerseData } from '../../store/verseStore';
+
 interface FilterPanelProps {
-  allVerses: any[];
+  allVerses: VerseData[];
   currentFilters: {
     mandala?: number;
     sukta?: number;

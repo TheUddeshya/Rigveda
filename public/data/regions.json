@@ -5,18 +5,279 @@
       "name_sanskrit": "सप्त सिन्धु",
       "modern_location": "Punjab and surrounding regions",
       "coordinates": {"lat": 31.1471, "lng": 75.3412},
-      "references": ["1.1.1", "6.61.1"],
-      "significance": "Primary region of early Vedic civilization",
-      "notes": "Mentioned extensively as the home of the Aryans"
+      "references": ["1.32.12", "2.12.3", "8.24.27"],
+      "significance": "Primary region of early Vedic civilization - land of seven rivers",
+      "notes": "The heartland of Rigvedic culture, comprising seven major rivers"
     },
     {
-      "name": "Āryāvarta",
+      "name": "Sarasvati",
+      "name_sanskrit": "सरस्वती",
+      "modern_location": "Ghaggar-Hakra river basin",
+      "coordinates": {"lat": 29.5857, "lng": 74.3158},
+      "references": ["2.41.16", "6.61", "7.95", "7.96"],
+      "significance": "Most sacred river in the Rigveda, called 'best of rivers'",
+      "notes": "Central to Vedic civilization, later dried up or changed course"
+    },
+    {
+      "name": "Sindhu",
+      "name_sanskrit": "सिन्धु",
+      "modern_location": "Indus River",
+      "coordinates": {"lat": 31.3260, "lng": 71.0389},
+      "references": ["10.75.1", "1.126.1", "7.95.1"],
+      "significance": "Mighty river, gave name to India (Hindustan)",
+      "notes": "Western boundary of Vedic civilization"
+    },
+    {
+      "name": "Ganga",
+      "name_sanskrit": "गङ्गा",
+      "modern_location": "Ganges River",
+      "coordinates": {"lat": 25.3176, "lng": 83.0127},
+      "references": ["10.75.5"],
+      "significance": "Mentioned only once in Rigveda, gained prominence later",
+      "notes": "Eastern extent of later Vedic expansion"
+    },
+    {
+      "name": "Yamuna",
+      "name_sanskrit": "यमुना",
+      "modern_location": "Yamuna River",
+      "coordinates": {"lat": 27.1767, "lng": 78.0081},
+      "references": ["5.52.17", "7.18.19", "10.75.5"],
+      "significance": "Important tributary of Ganga",
+      "notes": "Often mentioned with Sarasvati"
+    },
+    {
+      "name": "Shutudri",
+      "name_sanskrit": "शुतुद्रि",
+      "modern_location": "Sutlej River",
+      "coordinates": {"lat": 31.0121, "lng": 75.1089},
+      "references": ["3.33"],
+      "significance": "One of the seven rivers of Sapta Sindhu",
+      "notes": "Scene of famous dialogue hymn with Vishvamitra"
+    },
+    {
+      "name": "Vipash",
+      "name_sanskrit": "विपाश",
+      "modern_location": "Beas River",
+      "coordinates": {"lat": 31.1471, "lng": 75.3412},
+      "references": ["3.33"],
+      "significance": "One of the seven rivers",
+      "notes": "Crossed by Vishvamitra's tribe"
+    },
+    {
+      "name": "Parushni",
+      "name_sanskrit": "परुष्णी",
+      "modern_location": "Ravi River",
+      "coordinates": {"lat": 30.6798, "lng": 71.7047},
+      "references": ["4.22.2", "7.18"],
+      "significance": "Site of Battle of Ten Kings (Dasharajna)",
+      "notes": "Central to important historical battle"
+    },
+    {
+      "name": "Asikni",
+      "name_sanskrit": "असिक्नी",
+      "modern_location": "Chenab River",
+      "coordinates": {"lat": 31.6251, "lng": 74.8762},
+      "references": ["8.20.25", "10.75.5"],
+      "significance": "One of the Punjab rivers",
+      "notes": "Part of the five rivers system"
+    },
+    {
+      "name": "Vitasta",
+      "name_sanskrit": "वितस्ता",
+      "modern_location": "Jhelum River",
+      "coordinates": {"lat": 32.9332, "lng": 73.7289},
+      "references": ["10.75.5"],
+      "significance": "Northwestern river of Punjab",
+      "notes": "Mentioned in the river hymn"
+    },
+    {
+      "name": "Aryavarta",
       "name_sanskrit": "आर्यावर्त",
       "modern_location": "Indo-Gangetic Plain",
       "coordinates": {"lat": 27.0, "lng": 80.0},
-      "references": ["3.53.11"],
+      "references": ["1.7.1", "7.83.1"],
       "significance": "Classical realm of Aryan peoples",
       "notes": "Expanded definition in later Vedic literature"
+    },
+    {
+      "name": "Kubha",
+      "name_sanskrit": "कुभा",
+      "modern_location": "Kabul River, Afghanistan",
+      "coordinates": {"lat": 34.5553, "lng": 69.2075},
+      "references": ["5.53.9", "10.75.6"],
+      "significance": "Northwestern frontier river",
+      "notes": "Shows extent of Vedic geographical knowledge"
+    },
+    {
+      "name": "Krumu",
+      "name_sanskrit": "क्रुमु",
+      "modern_location": "Kurram River, Pakistan",
+      "coordinates": {"lat": 33.5651, "lng": 70.4583},
+      "references": ["5.53.9", "10.75.6"],
+      "significance": "Northwestern tributary",
+      "notes": "Part of greater Indus system"
+    },
+    {
+      "name": "Gomal",
+      "name_sanskrit": "गोमती",
+      "modern_location": "Gomal River, Pakistan",
+      "coordinates": {"lat": 31.8261, "lng": 70.3986},
+      "references": ["10.75.6", "8.24.30"],
+      "significance": "Northwestern river",
+      "notes": "Different from Gomati in UP"
+    },
+    {
+      "name": "Drishadvati",
+      "name_sanskrit": "दृषद्वती",
+      "modern_location": "Chautang River, Haryana",
+      "coordinates": {"lat": 29.1492, "lng": 75.7217},
+      "references": ["3.23.4"],
+      "significance": "Flowed parallel to Sarasvati",
+      "notes": "Marked boundary of sacred land"
+    },
+    {
+      "name": "Suvastu",
+      "name_sanskrit": "सुवास्तु",
+      "modern_location": "Swat River, Pakistan",
+      "coordinates": {"lat": 35.1176, "lng": 72.1543},
+      "references": ["8.19.37"],
+      "significance": "Northwestern river valley",
+      "notes": "Rich valley mentioned for its beauty"
+    },
+    {
+      "name": "Gandhara",
+      "name_sanskrit": "गान्धार",
+      "modern_location": "Peshawar and Swat valleys",
+      "coordinates": {"lat": 34.0151, "lng": 71.5249},
+      "references": ["1.126.7"],
+      "significance": "Northwestern region, famous for horses",
+      "notes": "Later became important Buddhist center"
+    },
+    {
+      "name": "Mujavat",
+      "name_sanskrit": "मूजवत्",
+      "modern_location": "Hindukush or Pamirs",
+      "coordinates": {"lat": 36.8833, "lng": 72.2000},
+      "references": ["10.34.1"],
+      "significance": "Mountain region, source of Soma",
+      "notes": "Northern mountainous region"
+    },
+    {
+      "name": "Rasā",
+      "name_sanskrit": "रसा",
+      "modern_location": "Possibly Rosh/Araxes or mythical",
+      "coordinates": {"lat": 38.5000, "lng": 68.7000},
+      "references": ["1.112.12", "5.53.9", "10.75.6"],
+      "significance": "Distant or mythical river",
+      "notes": "May represent boundary of known world"
+    },
+    {
+      "name": "Himalaya",
+      "name_sanskrit": "हिमालय",
+      "modern_location": "Himalayan Mountains",
+      "coordinates": {"lat": 28.5983, "lng": 83.9311},
+      "references": ["10.121.4"],
+      "significance": "Northern mountain barrier",
+      "notes": "Source of rivers, abode of gods"
+    },
+    {
+      "name": "Bharata",
+      "name_sanskrit": "भरत",
+      "modern_location": "Kurukshetra region",
+      "coordinates": {"lat": 29.9695, "lng": 76.8783},
+      "references": ["3.53", "7.18"],
+      "significance": "Territory of Bharata tribe",
+      "notes": "Gave name to India (Bharat)"
+    },
+    {
+      "name": "Puru",
+      "name_sanskrit": "पुरु",
+      "modern_location": "Western Punjab",
+      "coordinates": {"lat": 31.5497, "lng": 74.3436},
+      "references": ["1.129.1", "7.96.2"],
+      "significance": "Territory of Puru tribe",
+      "notes": "Major tribe in Rigvedic period"
+    },
+    {
+      "name": "Kuru",
+      "name_sanskrit": "कुरु",
+      "modern_location": "Kurukshetra, Haryana",
+      "coordinates": {"lat": 29.9695, "lng": 76.8783},
+      "references": ["10.33.4"],
+      "significance": "Late Rigvedic kingdom",
+      "notes": "Later became center of epic Mahabharata"
+    },
+    {
+      "name": "Panchala",
+      "name_sanskrit": "पाञ्चाल",
+      "modern_location": "Western Uttar Pradesh",
+      "coordinates": {"lat": 27.8974, "lng": 78.8880},
+      "references": ["1.36.18"],
+      "significance": "Late Rigvedic tribal territory",
+      "notes": "Confederation of five tribes"
+    },
+    {
+      "name": "Tritsus",
+      "name_sanskrit": "तृत्सु",
+      "modern_location": "Central Punjab",
+      "coordinates": {"lat": 30.7333, "lng": 76.7794},
+      "references": ["7.18", "7.33", "7.83"],
+      "significance": "Tribe of King Sudas",
+      "notes": "Victorious in Battle of Ten Kings"
+    },
+    {
+      "name": "Matsya",
+      "name_sanskrit": "मत्स्य",
+      "modern_location": "Rajasthan (Alwar, Bharatpur)",
+      "coordinates": {"lat": 27.2152, "lng": 77.0030},
+      "references": ["7.18.6"],
+      "significance": "Tribe/kingdom south of Kurus",
+      "notes": "Fish tribe, later a Mahajanapada"
+    },
+    {
+      "name": "Vindhya",
+      "name_sanskrit": "विन्ध्य",
+      "modern_location": "Vindhya Range",
+      "coordinates": {"lat": 24.5000, "lng": 82.0000},
+      "references": ["Indirect references"],
+      "significance": "Southern mountain boundary",
+      "notes": "Limited references, marks southern extent"
+    },
+    {
+      "name": "Soma Mountains",
+      "name_sanskrit": "सोमपर्वत",
+      "modern_location": "Unknown - possibly Hindukush",
+      "coordinates": {"lat": 36.0000, "lng": 71.0000},
+      "references": ["9.113", "10.34"],
+      "significance": "Source of Soma plant",
+      "notes": "Sacred mountains where Soma grows"
+    },
+    {
+      "name": "Arjikiya",
+      "name_sanskrit": "आर्जीकीय",
+      "modern_location": "Possibly near Vipash",
+      "coordinates": {"lat": 31.1000, "lng": 75.5000},
+      "references": ["8.7.29"],
+      "significance": "Region near rivers",
+      "notes": "Associated with Soma preparation"
+    },
+    {
+      "name": "Kikata",
+      "name_sanskrit": "कीकट",
+      "modern_location": "South Bihar (Magadha)",
+      "coordinates": {"lat": 24.7914, "lng": 85.0002},
+      "references": ["3.53.14"],
+      "significance": "Non-Aryan territory",
+      "notes": "Later became Magadha kingdom"
+    },
+    {
+      "name": "Anga",
+      "name_sanskrit": "अङ्ग",
+      "modern_location": "Eastern Bihar, Bengal",
+      "coordinates": {"lat": 25.0375, "lng": 87.4790},
+      "references": ["Indirect references"],
+      "significance": "Eastern frontier",
+      "notes": "Limited Rigvedic presence"
     }
   ]
 }

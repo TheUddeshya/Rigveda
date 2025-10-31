@@ -1,5 +1,5 @@
 // TODO: Implement analytics
 
-export const trackEvent = (event: string) =&gt; {
+export const trackEvent = (event: string) => {
   console.log(event);
 };

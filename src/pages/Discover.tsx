@@ -7,7 +7,10 @@ import { cn } from '../lib/utils';
 const Discover = () => {
   const { verses, loading } = useVerses();
   const [activeTab, setActiveTab] = useState<'analytics' | 'geography' | 'connections' | 'timeline'>('analytics');
+  // Regions and deities data shapes are dynamic; allow any for now
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [regionsData, setRegionsData] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [deitiesData, setDeitiesData] = useState<any[]>([]);
 
   useEffect(() => {

@@ -7,7 +7,9 @@ export interface SearchOptions {
 }
 
 export const createSearchEngine = (verses: VerseData[]) => {
-  const options: Fuse.IFuseOptions<VerseData> = {
+  // Fuse types can be complicated in some TS configs; use a loose any for options here
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const options: any = {
     threshold: 0.4,
     keys: [
       'text.sanskrit',

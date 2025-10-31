@@ -1,5 +1,5 @@
 // TODO: Implement transliteration
 
-export const transliterate = (text: string) =&gt; {
+export const transliterate = (text: string) => {
   return text;
 };

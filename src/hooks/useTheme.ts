@@ -1,5 +1,4 @@
 import { useUIStore } from '../store/uiStore';
-import type { Theme } from '../store/uiStore';
 
 export const useTheme = () => {
   const theme = useUIStore((state) => state.theme);

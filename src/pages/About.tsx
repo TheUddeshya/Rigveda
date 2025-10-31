@@ -1,7 +1,5 @@
 import PageLayout from '../components/layout/PageLayout';
 import { Heart, Users, BookOpen, Shield } from 'lucide-react';
-import { cn } from '../lib/utils';
-
 const About = () => {
   return (
     <PageLayout>
