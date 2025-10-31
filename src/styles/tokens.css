@@ -1,0 +1,28 @@
+:root {
+  /* Spacing (px) */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+
+  /* Color system */
+  --color-vedic-night: #2D3142;
+  --color-vedic-agni: #FF6B35;
+  --color-vedic-ushas: #FFD93D;
+  --color-vedic-soma: #E8F1F5;
+  --color-vedic-gold: #D4AF37;
+  --color-vedic-earth: #8B7355;
+  --color-vedic-sky: #4A90E2;
+
+  /* Font family names */
+  --font-sanskrit: 'Noto Serif Devanagari', serif;
+  --font-transliteration: 'Gentium Plus', serif;
+  --font-reading: 'Crimson Pro', serif;
+  --font-ui: 'Inter', sans-serif;
+
+  /* Transition tokens */
+  --transition-speed: 200ms;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}

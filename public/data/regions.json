@@ -1,0 +1,22 @@
+{
+  "regions": [
+    {
+      "name": "Sapta Sindhu",
+      "name_sanskrit": "सप्त सिन्धु",
+      "modern_location": "Punjab and surrounding regions",
+      "coordinates": {"lat": 31.1471, "lng": 75.3412},
+      "references": ["1.1.1", "6.61.1"],
+      "significance": "Primary region of early Vedic civilization",
+      "notes": "Mentioned extensively as the home of the Aryans"
+    },
+    {
+      "name": "Āryāvarta",
+      "name_sanskrit": "आर्यावर्त",
+      "modern_location": "Indo-Gangetic Plain",
+      "coordinates": {"lat": 27.0, "lng": 80.0},
+      "references": ["3.53.11"],
+      "significance": "Classical realm of Aryan peoples",
+      "notes": "Expanded definition in later Vedic literature"
+    }
+  ]
+}

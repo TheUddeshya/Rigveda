@@ -1,0 +1,51 @@
+{
+  "deities": [
+    {
+      "name": "Agni",
+      "name_sanskrit": "अग्नि",
+      "element": "Fire",
+      "role": "Mediator between humans and gods, messenger",
+      "attributes": [
+        "transformation",
+        "purification",
+        "sacrifice",
+        "light"
+      ],
+      "symbols": ["🔥", "flame", "smoke"],
+      "color": "#FF6B35",
+      "hymn_count": 200,
+      "primary_mandalas": [1,2,3,5,6,7,10],
+      "related_deities": ["Indra", "Soma", "Ushas"],
+      "iconography": "Often depicted with seven tongues of flame",
+      "epithets": ["Jatavedas", "Vaisvanara", "Havyavahana"]
+    },
+    {
+      "name": "Indra",
+      "name_sanskrit": "इन्द्र",
+      "element": "Atmosphere",
+      "role": "King of gods, thunder, rain, war",
+      "attributes": ["strength", "leadership", "victory"],
+      "symbols": ["⚡️", "vajra", "elephant"],
+      "color": "#2D9CDB",
+      "hymn_count": 289,
+      "primary_mandalas": [1,2,3,4,6,8,10],
+      "related_deities": ["Agni", "Soma", "Varuna"],
+      "iconography": "Often shown riding on elephant Airavata",
+      "epithets": ["Shakra", "Maghavan", "Vritrahan"]
+    },
+    {
+      "name": "Soma",
+      "name_sanskrit": "सोम",
+      "element": "Moon/Plant",
+      "role": "Deified sacred drink and moon-god",
+      "attributes": ["immortality", "inspiration", "flow"],
+      "symbols": ["🌙", "plant", "stream"],
+      "color": "#E8F1F5",
+      "hymn_count": 123,
+      "primary_mandalas": [9],
+      "related_deities": ["Indra", "Agni"],
+      "iconography": "Depicted as both a god and the elixir",
+      "epithets": ["Pavamana", "Indu"]
+    }
+  ]
+}

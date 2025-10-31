@@ -1,0 +1,61 @@
+@import './tokens.css';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-reading);
+    background-color: var(--color-vedic-soma);
+    color: var(--color-vedic-night);
+    transition: background-color var(--transition-speed) var(--transition-easing),
+                color var(--transition-speed) var(--transition-easing);
+  }
+
+  .dark body {
+    background-color: var(--color-vedic-night);
+    color: var(--color-vedic-soma);
+  }
+
+  /* Typography Classes */
+  .text-sanskrit {
+    font-family: var(--font-sanskrit);
+    font-size: 1.2em;
+    line-height: 1.8;
+  }
+
+  .text-transliteration {
+    font-family: var(--font-transliteration);
+    font-size: 1em;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .text-reading {
+    font-family: var(--font-reading);
+    font-size: 1em;
+    line-height: 1.6;
+  }
+
+  .text-ui {
+    font-family: var(--font-ui);
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  /* Dark mode variants */
+  .dark .text-sanskrit,
+  .dark .text-transliteration,
+  .dark .text-reading,
+  .dark .text-ui {
+    color: var(--color-vedic-soma);
+  }
+
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid var(--color-vedic-sky);
+    outline-offset: 2px;
+  }
+}

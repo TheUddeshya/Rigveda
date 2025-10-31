@@ -1,0 +1,267 @@
+{
+  "verses": [
+    {
+      "id": "1.1.1",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 1,
+      "text": {
+        "sanskrit": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम् । होतारं रत्नधातमम् ॥",
+        "iast": "agním īḷe puróhitaṃ yajñásya devám ṛtvíjam | hótāraṃ ratnadhā́tamam ||",
+        "translations": [
+          {
+            "language": "en",
+            "translator": "Griffith",
+            "text": "I Laud Agni, the chosen Priest, God, minister of sacrifice, The hotar, lavishest of wealth.",
+            "year": 1896
+          },
+          {
+            "language": "en",
+            "translator": "Jamison-Brereton",
+            "text": "I summon Agni, the priest placed in front, the god of the ritual, the invoker, best bestower of treasure.",
+            "year": 2014
+          }
+        ]
+      },
+      "metadata": {
+        "deity": {"primary": "Agni", "secondary": null},
+        "rishi": {"name": "Madhuchchhandas Vaishvamitra", "gotra": "Vaishvamitra", "family": "Angiras"},
+        "meter": "Gayatri",
+        "category": "devata"
+      },
+      "themes": ["fire", "sacrifice", "ritual", "priest"],
+      "keywords": {
+        "sanskrit": ["अग्नि", "पुरोहित", "यज्ञ", "देव", "होतृ"],
+        "english": ["agni", "priest", "sacrifice", "god"]
+      },
+      "context": {
+        "significance": "Opening verse of the Rig Veda",
+        "ritual_use": "Chanted at start of fire sacrifices",
+        "symbolic_meaning": "Agni as the divine mediator",
+        "note": "Establishes Agni's preeminent position"
+      },
+      "connections": {
+        "related_verses": ["1.1.2", "1.2.1"],
+        "parallel_hymns": ["10.9.1"],
+        "referenced_in": ["Shukla Yajurveda 1.1"]
+      },
+      "geography": {
+        "region": "Sapta Sindhu",
+        "modern_location": "Punjab region",
+        "coordinates": {"lat": 31.1471, "lng": 75.3412}
+      },
+      "chronology": {
+        "layer": "early",
+        "approx_period": "1500-1200 BCE",
+        "relative_date": -1500
+      },
+      "audio": {
+        "pronunciation_url": "/audio/1.1.1.mp3",
+        "recitation_style": "Samhita Patha"
+      },
+      "analysis": {
+        "word_count": 9,
+        "complexity": "medium",
+        "poetic_devices": ["alliteration"],
+        "grammatical_notes": "Accusative case for Agni"
+      }
+    },
+    {
+      "id": "1.1.2",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 2,
+      "text": {
+        "sanskrit": "अग्निः पूर्वेभिरृषिभिरीड्यो नूतनैरुत । स देवाँ एह वक्षति ॥",
+        "iast": "agniḥ pūrvebhir ṛṣibhir īḍyo nūtanair uta | sa devāṃ eha vakṣati ||",
+        "translations": [
+          {
+            "language": "en",
+            "translator": "Griffith",
+            "text": "Worthy is Agni to be praised by living as by ancient seers. He shall bring hitherward the Gods.",
+            "year": 1896
+          }
+        ]
+      },
+      "metadata": {
+        "deity": {"primary": "Agni", "secondary": null},
+        "rishi": {"name": "Madhuchchhandas Vaishvamitra", "gotra": "Vaishvamitra", "family": "Angiras"},
+        "meter": "Gayatri",
+        "category": "devata"
+      },
+      "themes": ["fire", "ancestors", "divine"],
+      "keywords": {"sanskrit": ["अग्नि", "ऋषि", "देव"], "english": ["agni", "seer", "god"]},
+      "context": {"significance": "Honors continuity of ritual by ancient and new seers.", "note": "Links past and present through Agni."},
+      "connections": {"related_verses": ["1.1.1", "1.1.3"], "parallel_hymns": [], "referenced_in": []},
+      "geography": {"region": "Sapta Sindhu", "modern_location": "Punjab", "coordinates": {"lat": 31.1471, "lng": 75.3412}},
+      "chronology": {"layer": "early", "approx_period": "1500-1200 BCE", "relative_date": -1499},
+      "audio": {"pronunciation_url": "/audio/1.1.2.mp3", "recitation_style": "Samhita Patha"},
+      "analysis": {"word_count": 8, "complexity": "easy", "poetic_devices": ["repetition"], "grammatical_notes": "Present tense indicative verbs"}
+    },
+    {
+      "id": "1.1.3",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 3,
+      "text": {
+        "sanskrit": "अग्निना रयिमश्नवत्पोषमेव दिवेदिवे । यशसं वीरवत्तमम् ॥",
+        "iast": "agninā rayim aśnavat poṣam eva divedive | yaśasaṁ vīravattamam ||",
+        "translations": [
+          {
+            "language": "en",
+            "translator": "Griffith",
+            "text": "Through Agni man obtaineth wealth, yea, plenty, day by day, glorious and most abounding strength.",
+            "year": 1896
+          }
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni", "secondary": null}, "rishi": {"name": "Madhuchchhandas Vaishvamitra", "gotra": "Vaishvamitra", "family": "Angiras"}, "meter": "Gayatri", "category": "devata"},
+      "themes": ["wealth", "divine"],
+      "keywords": {"sanskrit": ["अग्नि", "रयि", "धन"], "english": ["wealth", "strength"]},
+      "context": {"significance": "Agni as bestower of riches.", "note": "Material and spiritual prosperity."},
+      "connections": {"related_verses": ["1.1.2", "1.1.4"], "parallel_hymns": [], "referenced_in": []},
+      "geography": {"region": "Sapta Sindhu", "modern_location": "Punjab", "coordinates": {"lat": 31.1471, "lng": 75.3412}},
+      "chronology": {"layer": "early", "approx_period": "1500-1200 BCE", "relative_date": -1498},
+      "audio": {"pronunciation_url": "/audio/1.1.3.mp3", "recitation_style": "Samhita Patha"},
+      "analysis": {"word_count": 7, "complexity": "easy", "poetic_devices": ["paronomasia"], "grammatical_notes": "Instrumental case for agninā"}
+    },
+    {
+      "id": "1.1.4",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 4,
+      "text": {
+        "sanskrit": "अग्ने यं यज्ञमध्वरं विश्वतः परिभूरसि । स इद्देवेषु गच्छति ॥",
+        "iast": "agne yaṁ yajñam adhvaraṁ viśvataḥ paribhūr asi | sa id deveṣu gacchati ||",
+        "translations": [
+          {"language": "en", "translator": "Griffith", "text": "Agni, the perfect sacrifice which thou encompassest about verily goeth to the Gods.", "year": 1896}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni", "secondary": null}, "rishi": {"name": "Madhuchchhandas Vaishvamitra", "gotra": "Vaishvamitra", "family": "Angiras"}, "meter": "Gayatri", "category": "devata"},
+      "themes": ["ritual", "divine", "sacrifice"],
+      "keywords": {"sanskrit": ["अग्नि", "यज्ञ", "देवेशु"], "english": ["agni", "sacrifice", "gods"]},
+      "context": {"significance": "Agni as the conveyor of sacrifice.", "note": "Links man to gods."},
+      "connections": {"related_verses": ["1.1.3", "1.1.5"]},
+      "geography": {"region": "Punjab", "modern_location": "Punjab", "coordinates": {"lat": 31.1471, "lng": 75.3412}},
+      "chronology": {"layer": "early", "approx_period": "1500-1200 BCE", "relative_date": -1497},
+      "audio": {"pronunciation_url": "/audio/1.1.4.mp3", "recitation_style": "Samhita Patha"},
+      "analysis": {"word_count": 9, "complexity": "medium", "poetic_devices": [], "grammatical_notes": "2nd person vocative, present active"}
+    },
+    {
+      "id": "1.1.5",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 5,
+      "text": {
+        "sanskrit": "अग्निर्होता कवेः कवे यज्ञस्य सुमतिं विधत् । स देवाँ एह वक्षति ॥",
+        "iast": "agniḥ hotā kaveḥ kave yajñásya sumatiṁ vidhat | sa devāṃ eha vakṣati ||",
+        "translations": [
+          {"language": "en", "translator": "Griffith", "text": "May Agni, priest among the seers, the offerer, wise, bring hitherward the Gods.", "year": 1896}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni", "secondary": null}, "rishi": {"name": "Madhuchchhandas Vaishvamitra", "gotra": "Vaishvamitra"}, "meter": "Gayatri", "category": "devata"},
+      "themes": ["sacrifice", "wisdom"],
+      "keywords": {"sanskrit": ["अग्नि", "कवि", "सुमति"], "english": ["agni", "priest", "wise"]},
+      "context": {"significance": "Praises Agni's wisdom and priesthood."},
+      "connections": {"related_verses": ["1.1.4", "1.1.6"]},
+      "geography": {"region": "Punjab", "modern_location": "Punjab", "coordinates": {"lat": 31.1471, "lng": 75.3412}},
+      "chronology": {"layer": "early", "approx_period": "1500-1200 BCE", "relative_date": -1496},
+      "audio": {"pronunciation_url": "/audio/1.1.5.mp3", "recitation_style": "Samhita Patha"},
+      "analysis": {"word_count": 10, "complexity": "medium", "poetic_devices": [], "grammatical_notes": "Third person, future tense"}
+    },
+    {
+      "id": "1.1.6",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 6,
+      "text": {
+        "sanskrit": "agneyaṁ yajñमध्वरं पुरःसूतः पृथिव्या:। स देवान् वह्निरासदं ॥",
+        "iast": "agneyam yajñam adhvaraṁ puraḥsūtaḥ pṛthivyāḥ | sa devān vahnirāsadaṁ ||",
+        "translations": [
+          {"language": "en", "translator": "Jamison-Brereton", "text": "Agni, being placed in front of this rite, bring the gods near." , "year": 2014}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni"}, "rishi": {"name": "Madhuchchhandas Vaishvamitra"}, "meter": "Gayatri", "category": "devata"},
+      "themes": ["fire", "offering"],
+      "keywords": {"sanskrit": ["अग्नि", "यज्ञ", "देव"], "english": ["agni", "offering"]},
+      "context": {"significance": "Emphasizes Agni's priestly role."},
+      "connections": {"related_verses": ["1.1.5", "1.1.7"]},
+      "geography": {"region": "Punjab"},
+      "chronology": {"layer": "early"},
+      "audio": {"pronunciation_url": "/audio/1.1.6.mp3"},
+      "analysis": {"word_count": 8, "complexity": "easy"}
+    },
+    {
+      "id": "1.1.7",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 7,
+      "text": {
+        "sanskrit": "अग्ने यं यज्ञमध्वरं विश्वतः परिभूरसि । स इद्देवेषु गच्छति ॥",
+        "iast": "agne yaṁ yajñam adhvaraṁ viśvataḥ paribhūr asi | sa id deveṣu gacchati ||",
+        "translations": [
+          {"language": "en", "translator": "Wilson", "text": "Agni, you surround every offering, the sacrifice goes directly to the gods.", "year": 1850}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni"}, "rishi": {"name": "Madhuchchhandas Vaishvamitra"}, "meter": "Gayatri"},
+      "themes": ["sacrifice", "offering"],
+      "keywords": {"sanskrit": ["अग्नि", "यज्ञ"], "english": ["agni", "sacrifice"]},
+      "context": {"significance": "Agni as channel to gods."},
+      "connections": {"related_verses": ["1.1.6", "1.1.8"]}
+    },
+    {
+      "id": "1.1.8",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 8,
+      "text": {
+        "sanskrit": "स नो मित्रो न कोई तवायतु सखा पुरः । यं त्वं तक्ष्यग्ने सनो रक्तः स कृणोतु नः ॥",
+        "iast": "sa no mitro na koī tavāyatu sakhā puraḥ | yaṃ tvaṃ takṣy agne sa no raktaḥ sa kṛṇotu naḥ ||",
+        "translations": [
+          {"language": "en", "translator": "Griffith", "text": "So may our friend, no foe, approach, Agni, our companion before us, may he do good for us."}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni"}, "rishi": {"name": "Madhuchchhandas Vaishvamitra"}, "meter": "Gayatri"},
+      "themes": ["friendship", "prayer"],
+      "keywords": {"sanskrit": ["मित्र", "सखा"], "english": ["friend", "companion"]},
+      "context": {"significance": "Prayer for friendship and safety."},
+      "connections": {"related_verses": ["1.1.7", "1.1.9"]}
+    },
+    {
+      "id": "1.1.9",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 9,
+      "text": {
+        "sanskrit": "अग्ने सुतका, उप, प्रयस्वितका देवान् यजस्व ना इहि ।",
+        "iast": "agne sutakā upa prayasvitkā devān yajasva nā ihi ||",
+        "translations": [
+          {"language": "en", "translator": "Griffith", "text": "Agni, with sacred cakes and all, bring the gods near for sacrifice."}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni"}, "rishi": {"name": "Madhuchchhandas Vaishvamitra"}, "meter": "Gayatri"},
+      "themes": ["offering", "ritual"],
+      "keywords": {"sanskrit": ["यजस्व", "देवान्"], "english": ["sacrifice", "gods"]},
+      "context": {"significance": "Invoking Agni to bring gods to sacrifice."},
+      "connections": {"related_verses": ["1.1.8", "1.1.10"]}
+    },
+    {
+      "id": "1.1.10",
+      "mandala": 1,
+      "sukta": 1,
+      "verse": 10,
+      "text": {
+        "sanskrit": "अग्निरिह देवाँ आयातु समिद्धः प्रमुखृद्विना । स हि होता प्रतिकृतिः ॥",
+        "iast": "agnir iha devāṃ āyātu samiddhaḥ pramukhr̥dvinā | sa hi hotā pratikr̥tiḥ ||",
+        "translations": [
+          {"language": "en", "translator": "Jamison-Brereton", "text": "Let Agni here bring the gods, blazing, the perfect Hotar always.", "year": 2014}
+        ]
+      },
+      "metadata": {"deity": {"primary": "Agni"}, "rishi": {"name": "Madhuchchhandas Vaishvamitra"}, "meter": "Gayatri"},
+      "themes": ["sacrifice", "prayer"],
+      "keywords": {"sanskrit": ["अग्नि", "होता"], "english": ["agni", "priest"]},
+      "context": {"significance": "Blazing Agni as the perfect priest."},
+      "connections": {"related_verses": ["1.1.9"]}
+    }
+  ]
+}
