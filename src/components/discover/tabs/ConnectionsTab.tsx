@@ -1,7 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import type { Deity } from '../../../types';
+
 interface ConnectionsTabProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deitiesData: any[];
+  deitiesData: Deity[];
 }
 
 const ConnectionsTab = ({ deitiesData }: ConnectionsTabProps) => {

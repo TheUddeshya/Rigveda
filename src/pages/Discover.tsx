@@ -6,15 +6,13 @@ import AnalyticsTab from '../components/discover/tabs/AnalyticsTab';
 import GeographyTab from '../components/discover/tabs/GeographyTab';
 import ConnectionsTab from '../components/discover/tabs/ConnectionsTab';
 import TimelineTab from '../components/discover/tabs/TimelineTab';
+import type { Region, Deity } from '../types';
 
 const Discover = () => {
   const { verses, loading } = useVerses();
   const [activeTab, setActiveTab] = useState<'analytics' | 'geography' | 'connections' | 'timeline'>('analytics');
-  // Regions and deities data shapes are dynamic; allow any for now
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [regionsData, setRegionsData] = useState<any[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [deitiesData, setDeitiesData] = useState<any[]>([]);
+  const [regionsData, setRegionsData] = useState<Region[]>([]);
+  const [deitiesData, setDeitiesData] = useState<Deity[]>([]);
 
   useEffect(() => {
     const fetchRegions = async () => {

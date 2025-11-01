@@ -1,7 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import type { Region } from '../../../types';
+
 interface GeographyTabProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  regionsData: any[];
+  regionsData: Region[];
 }
 
 const GeographyTab = ({ regionsData }: GeographyTabProps) => {

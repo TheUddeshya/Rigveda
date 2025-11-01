@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import Fuse, { type IFuseOptions } from 'fuse.js';
 import type { VerseData } from '../store/verseStore';
 
 export interface SearchOptions {
@@ -7,9 +7,7 @@ export interface SearchOptions {
 }
 
 export const createSearchEngine = (verses: VerseData[]) => {
-  // Fuse types can be complicated in some TS configs; use a loose any for options here
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const options: any = {
+  const options: IFuseOptions<VerseData> = {
     threshold: 0.4,
     keys: [
       'text.sanskrit',
