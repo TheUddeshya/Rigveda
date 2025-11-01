@@ -42,6 +42,7 @@ type VerseCardProps = {
   enableAudio?: boolean;
   enableBookmark?: boolean;
   onVerseClick?: (id: string) => void;
+  isDailyVerse?: boolean; // New prop for distinguishing daily verse card
 };
 
 const VerseCard = ({
@@ -52,6 +53,7 @@ const VerseCard = ({
   enableAudio = true,
   enableBookmark = true,
   onVerseClick,
+  isDailyVerse = false,
 }: VerseCardProps) => {
   // Local copy of verse that we may enrich by lazy-loading its mandala if
   // incoming `verse` lacks metadata or translations.
@@ -150,7 +152,10 @@ const VerseCard = ({
       onKeyDown={e => e.key === 'Enter' && onVerseClick?.(verse.id)}
       className={cn(
         "group relative mb-6 md:mb-8 overflow-hidden cursor-pointer",
-        "bg-card text-card-foreground rounded-xl border border-vedic-accent/20",
+        isDailyVerse
+          ? "bg-gradient-to-br from-vedic-cream/20 to-vedic-sage/20 border-2 border-vedic-accent shadow-2xl shadow-vedic-accent/30"
+          : "bg-card border border-vedic-accent",
+        "text-card-foreground rounded-xl",
         "transition-all duration-300 ease-out",
         "hover:border-accent hover:shadow-xl hover:shadow-accent/10",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
@@ -164,7 +169,7 @@ const VerseCard = ({
       {/* Header: Mandala, Sukta, Verse, Bookmark, Audio */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-vedic-ui/50 border border-vedic-accent/20">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-vedic-ui/50 border border-vedic-accent/20 bg-vedic-sage/10">
               <span className="text-vedic-text font-semibold text-sm md:text-base font-ui">
               {localVerse.mandala}.{localVerse.sukta}.{localVerse.verse}
             </span>

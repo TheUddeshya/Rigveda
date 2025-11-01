@@ -10,6 +10,7 @@ import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useUIStore } from '../store/uiStore';
 import type { VerseData } from '../store/verseStore';
 import { XCircle } from 'lucide-react';
+import mandalaInfo from '../data/mandalaInfo.json';
 
 interface Filters {
   mandala?: number;
@@ -20,6 +21,25 @@ interface Filters {
   theme?: string;
   search?: string;
 }
+
+const MandalaCard = ({ mandala }: { mandala: typeof mandalaInfo[0] }) => (
+  <div className="bg-vedic-ui/50 rounded-xl p-6 hover:bg-vedic-ui/70 transition-all duration-200 border border-vedic-ui/30 hover:border-accent/30">
+    <div className="flex items-start justify-between mb-4">
+      <h3 className="text-xl font-bold text-vedic-text">Mandala {mandala.id}</h3>
+      <span className="bg-accent/20 text-accent px-2 py-1 rounded text-sm">
+        {mandala.verseCount} verses
+      </span>
+    </div>
+    <h4 className="text-lg font-semibold text-vedic-sage mb-2">{mandala.name}</h4>
+    <p className="text-muted-foreground mb-3">{mandala.description}</p>
+    <div className="flex items-center justify-between">
+      <span className="text-sm text-vedic-text/80">Primary deity: {mandala.deity}</span>
+      <button className="text-accent hover:text-accent/80 font-medium text-sm">
+        Explore →
+      </button>
+    </div>
+  </div>
+);
 
 const Explore = () => {
   const { verses, loading, error } = useVerses();
@@ -163,6 +183,9 @@ const Explore = () => {
     },
   ]);
 
+  // Check if we should show mandala cards (no search performed)
+  const showMandalaCards = !currentFilters.search && results.length === 0 && filteredVerses.length === sourceAllVerses.length;
+
   return (
     <PageLayout>
       <KeyboardShortcutsDialog isOpen={showShortcuts} onClose={() => setShowShortcuts(false)} />
@@ -212,40 +235,52 @@ const Explore = () => {
 
           {!((loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala)) && !error && (
             <>
-              <div className="mb-4 text-sm text-muted-foreground">
-                Showing {filteredVerses.length} of {sourceAllVerses.length} verses
-              </div>
-              <div className="space-y-6">
-                {filteredVerses.length > 0 ? (
-                  filteredVerses.map((verse: VerseData, index: number) => (
-                    <div
-                      key={verse.id}
-                      ref={(el) => { verseRefs.current[index] = el }}
-                      tabIndex={0}
-                      onFocus={() => setFocusedVerseIndex(index)}
-                    >
-                      <VerseCard
-                        verse={verse}
-                        viewMode="full"
-                        showContext
-                        showTranslation
-                        enableAudio={false}
-                        enableBookmark
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-xl text-muted-foreground mb-6">No verses match your filters</p>
-                    <button
-                      onClick={() => setCurrentFilters({})}
-                      className="px-6 py-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
-                    >
-                      Clear Filters
-                    </button>
+              {showMandalaCards ? (
+                // Show Mandala Cards Grid
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {mandalaInfo.map(mandala => (
+                    <MandalaCard key={mandala.id} mandala={mandala} />
+                  ))}
+                </div>
+              ) : (
+                // Show Filtered Verses
+                <>
+                  <div className="mb-4 text-sm text-muted-foreground">
+                    Showing {filteredVerses.length} of {sourceAllVerses.length} verses
                   </div>
-                )}
-              </div>
+                  <div className="space-y-6">
+                    {filteredVerses.length > 0 ? (
+                      filteredVerses.map((verse: VerseData, index: number) => (
+                        <div
+                          key={verse.id}
+                          ref={(el) => { verseRefs.current[index] = el }}
+                          tabIndex={0}
+                          onFocus={() => setFocusedVerseIndex(index)}
+                        >
+                          <VerseCard
+                            verse={verse}
+                            viewMode="full"
+                            showContext
+                            showTranslation
+                            enableAudio={false}
+                            enableBookmark
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-12">
+                        <p className="text-xl text-muted-foreground mb-6">No verses match your filters</p>
+                        <button
+                          onClick={() => setCurrentFilters({})}
+                          className="px-6 py-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
+                        >
+                          Clear Filters
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

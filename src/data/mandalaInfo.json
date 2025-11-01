@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Agni",
+    "description": "The Fire Hymns",
+    "verseCount": 191,
+    "deity": "Agni"
+  },
+  {
+    "id": 2,
+    "name": "Soma",
+    "description": "The Soma Hymns",
+    "verseCount": 43,
+    "deity": "Soma"
+  },
+  {
+    "id": 3,
+    "name": "Visvedevas",
+    "description": "Hymns to All Gods",
+    "verseCount": 62,
+    "deity": "Various"
+  },
+  {
+    "id": 4,
+    "name": "Vasishtha",
+    "description": "Hymns by Vasishtha",
+    "verseCount": 58,
+    "deity": "Indra"
+  },
+  {
+    "id": 5,
+    "name": "Atreyas",
+    "description": "Hymns by Atri and family",
+    "verseCount": 87,
+    "deity": "Agni, Indra"
+  },
+  {
+    "id": 6,
+    "name": "Bharadvaja",
+    "description": "Hymns by Bharadvaja",
+    "verseCount": 75,
+    "deity": "Indra, Agni"
+  },
+  {
+    "id": 7,
+    "name": "Vasishtha",
+    "description": "Second collection of Vasishtha",
+    "verseCount": 104,
+    "deity": "Indra, Varuna"
+  },
+  {
+    "id": 8,
+    "name": "Kashyapa",
+    "description": "Hymns by Kashyapa",
+    "verseCount": 103,
+    "deity": "Soma, Indra"
+  },
+  {
+    "id": 9,
+    "name": "Soma",
+    "description": "The Soma Mandala",
+    "verseCount": 114,
+    "deity": "Soma"
+  },
+  {
+    "id": 10,
+    "name": "Supplementary",
+    "description": "Supplementary hymns",
+    "verseCount": 191,
+    "deity": "Various"
+  }
+]

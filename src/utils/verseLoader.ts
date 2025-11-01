@@ -70,9 +70,8 @@ export async function loadMandala(mandala: number): Promise<VerseData[]> {
   return [];
 }
 
-// Load verses from per-mandala JSON files if available, otherwise fall back
-// to the legacy `/data/verses.json` file. This function still returns the
-// full merged verses array for callers that expect that behavior.
+// Load verses from per-mandala JSON files. This function returns the
+// full merged verses array from all 10 Mandalas.
 export const loadVerses = async (): Promise<VerseData[]> => {
   try {
     const loads = await Promise.allSettled(
@@ -88,15 +87,7 @@ export const loadVerses = async (): Promise<VerseData[]> => {
       }
     });
 
-    if (merged.length > 0) return merged;
-
-    // Fallback: try legacy file
-    const fallbackResp = await fetch('/data/verses.json');
-    if (!fallbackResp.ok) throw new Error('Failed to load fallback verses.json');
-    const fallbackData = await fallbackResp.json();
-    if (Array.isArray(fallbackData)) return fallbackData;
-    if (Array.isArray(fallbackData.verses)) return fallbackData.verses;
-    return [];
+    return merged;
   } catch (error) {
     console.error('Error loading verses:', error);
     return [];

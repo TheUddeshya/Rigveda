@@ -36,8 +36,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-[#697565]/30 text-center text-sm text-[#ECDFCC]/70">
-        <p>RigVeda Explorer • Honoring ancient wisdom with modern technology</p>
-        <p className="mt-1">No tracking • Privacy-first • Open source spirit</p>
+        <p>RigVeda</p>
       </div>
     </footer>
   );
