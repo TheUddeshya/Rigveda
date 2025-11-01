@@ -36,13 +36,13 @@ const Home = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
             className="text-7xl sm:text-8xl md:text-9xl font-sanskrit mb-8 text-center text-vedic-text"
-          >ऋग्वेद</motion.h1>
-          <motion.h2
+          >ऋग्वेदः</motion.h1>
+          {/* <motion.h2
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-3xl sm:text-4xl mb-4 font-reading text-center text-vedic-text"
-          >Explore the Rig Veda</motion.h2>
+          > Ṛgvedaḥ | Rigveda | 𑀋𑀕𑀯𑁂𑀥𑀳𑁂 </motion.h2> */}
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
