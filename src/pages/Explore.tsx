@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import FilterPanel from '../components/filters/FilterPanel';
 import KeyboardShortcutsDialog from '../components/ui/KeyboardShortcutsDialog';
@@ -76,23 +76,27 @@ const Explore = () => {
     return () => { mounted = false; };
   }, [currentFilters.mandala]);
 
-  // Filter verses based on all criteria
-  const filteredVerses = (currentFilters.search && results.length > 0 ? results : sourceAllVerses).filter((v: VerseData) => {
-    if (currentFilters.mandala && v.mandala !== currentFilters.mandala) return false;
-    if (currentFilters.sukta && v.sukta !== currentFilters.sukta) return false;
-    if (currentFilters.deity && v.metadata?.deity?.primary !== currentFilters.deity) return false;
-    if (currentFilters.rishi && v.metadata?.rishi?.name !== currentFilters.rishi) return false;
-    if (currentFilters.meter && v.metadata?.meter !== currentFilters.meter) return false;
-    if (currentFilters.theme && !v.themes?.includes(currentFilters.theme)) return false;
-    return true;
-  });
+  // Memoize filtered verses calculation to avoid re-filtering on every render
+  const filteredVerses = useMemo(() => {
+    const versesToFilter = currentFilters.search && results.length > 0 ? results : sourceAllVerses;
+    return versesToFilter.filter((v: VerseData) => {
+      if (currentFilters.mandala && v.mandala !== currentFilters.mandala) return false;
+      if (currentFilters.sukta && v.sukta !== currentFilters.sukta) return false;
+      if (currentFilters.deity && v.metadata?.deity?.primary !== currentFilters.deity) return false;
+      if (currentFilters.rishi && v.metadata?.rishi?.name !== currentFilters.rishi) return false;
+      if (currentFilters.meter && v.metadata?.meter !== currentFilters.meter) return false;
+      if (currentFilters.theme && !v.themes?.includes(currentFilters.theme)) return false;
+      return true;
+    });
+  }, [currentFilters, results, sourceAllVerses]);
 
-  const handleSearchHistoryClick = (searchItem: string) => {
+  // Memoize event handlers to prevent re-creating functions on every render
+  const handleSearchHistoryClick = useCallback((searchItem: string) => {
     setCurrentFilters(prev => ({ ...prev, search: searchItem }));
-  };
+  }, []);
 
-  // Keyboard navigation for verses
-  const navigateToVerse = (direction: 'next' | 'prev') => {
+  // Keyboard navigation for verses - memoized to avoid recreation
+  const navigateToVerse = useCallback((direction: 'next' | 'prev') => {
     if (filteredVerses.length === 0) return;
 
     let newIndex = focusedVerseIndex;
@@ -105,7 +109,7 @@ const Explore = () => {
     setFocusedVerseIndex(newIndex);
     verseRefs.current[newIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     verseRefs.current[newIndex]?.focus();
-  };
+  }, [filteredVerses.length, focusedVerseIndex]);
 
   // Global keyboard shortcuts
   useKeyboardShortcuts([
@@ -166,8 +170,11 @@ const Explore = () => {
     },
   ]);
 
-  // Check if we should show mandala cards (no search performed)
-  const showMandalaCards = !currentFilters.search && results.length === 0 && filteredVerses.length === sourceAllVerses.length;
+  // Check if we should show mandala cards (no search performed) - memoized
+  const showMandalaCards = useMemo(
+    () => !currentFilters.search && results.length === 0 && filteredVerses.length === sourceAllVerses.length,
+    [currentFilters.search, results.length, filteredVerses.length, sourceAllVerses.length]
+  );
 
   return (
     <PageLayout>

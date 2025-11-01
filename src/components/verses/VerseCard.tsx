@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import { useBookmarks } from '../../hooks/useBookmarks';
 import { cn } from '../../lib/utils';
 import { loadMandala } from '../../utils/verseLoader';
@@ -334,4 +334,17 @@ const VerseCard = ({
   );
 };
 
-export default VerseCard;
+// Memoize VerseCard to prevent unnecessary re-renders
+// Only re-render when verse.id, viewMode, or other props change
+export default memo(VerseCard, (prevProps, nextProps) => {
+  // Custom comparison: only re-render if these specific props change
+  return (
+    prevProps.verse.id === nextProps.verse.id &&
+    prevProps.viewMode === nextProps.viewMode &&
+    prevProps.showContext === nextProps.showContext &&
+    prevProps.showTranslation === nextProps.showTranslation &&
+    prevProps.enableAudio === nextProps.enableAudio &&
+    prevProps.enableBookmark === nextProps.enableBookmark &&
+    prevProps.isDailyVerse === nextProps.isDailyVerse
+  );
+});
