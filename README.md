@@ -1,4 +1,4 @@
-# Rigveda Explorer
+# Rigveda
 
 A modern web application for exploring and studying the Rigveda, built with React, TypeScript, and Vite.
 

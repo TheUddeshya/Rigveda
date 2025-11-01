@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* About Section */}
         <div>
-          <h3 className="text-xl font-bold mb-3 text-vedic-cream">RigVeda Explorer</h3>
+          <h3 className="text-xl font-bold mb-3 text-vedic-cream">Rigveda</h3>
           <p className="text-sm text-vedic-cream/80">
             A comprehensive digital platform for exploring the oldest scripture of humanity.
             Experience the Rig Veda with modern tools and ancient wisdom.

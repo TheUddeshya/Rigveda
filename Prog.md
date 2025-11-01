@@ -19,7 +19,7 @@ Fonts: Google Fonts CDN
 
 ---
 
-# 🔄 REFACTOR PLAN - Rigveda Explorer
+# 🔄 REFACTOR PLAN - Rigveda
 
 **Date Created:** 2025-11-02
 **Branch:** Refactor
