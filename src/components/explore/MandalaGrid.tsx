@@ -1,7 +1,11 @@
 import MandalaCard from './MandalaCard';
 import mandalaInfo from '../../data/mandalaInfo.json';
 
-const MandalaGrid = () => {
+interface MandalaGridProps {
+  onMandalaSelect: (mandalaId: number) => void;
+}
+
+const MandalaGrid = ({ onMandalaSelect }: MandalaGridProps) => {
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -9,7 +13,7 @@ const MandalaGrid = () => {
       aria-label="Mandalas of Rigveda"
     >
       {mandalaInfo.map(mandala => (
-        <MandalaCard key={mandala.id} mandala={mandala} />
+        <MandalaCard key={mandala.id} mandala={mandala} onSelect={onMandalaSelect} />
       ))}
     </div>
   );

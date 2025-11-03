@@ -4,8 +4,9 @@ import { useUIStore } from '../../store/uiStore';
 import { useVerses } from '../../hooks/useVerses';
 import { loadMandala } from '../../utils/verseLoader';
 import type { VerseData } from '../../store/verseStore';
-import { X } from 'lucide-react';
+import { X, ChevronRight, BookOpen, Scroll, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '../../lib/utils';
 
 const Sidebar: React.FC = () => {
   const { sidebarOpen, setSidebarOpen } = useUIStore();
@@ -218,74 +219,161 @@ const Sidebar: React.FC = () => {
   return (
     <AnimatePresence>
       {sidebarOpen && (
-        <motion.aside
-          initial={{ x: -320, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -320, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed inset-y-0 left-0 w-80 bg-vedic-ui/95 border-r border-vedic-accent/20 z-50 p-4 flex flex-col"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-vedic-text">Rigveda Index</h2>
-            <button
-              aria-label="Close sidebar"
-              className="p-2 rounded-lg hover:bg-vedic-sage/20"
-              onClick={() => setSidebarOpen(false)}
-            >
-              <X className="text-vedic-text" />
-            </button>
-          </div>
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            onClick={() => setSidebarOpen(false)}
+          />
 
-          {/* nav wrapper centers content vertically when short, but allows scrolling when long */}
-          <div className="flex-1 flex items-center justify-center">
-            <div className="w-full" style={{ maxHeight: 'calc(100vh - 140px)', overflow: 'auto' }}>
-              <nav role="tree" aria-label="Rigveda index">
-                {Array.from(tree.keys()).sort((a, b) => a - b).map((mandala, idx) => {
-                  const sMap = tree.get(mandala)!;
-                  const isMandalaOpen = activeMandala === mandala;
-                  return (
-                    <div key={mandala} className="mb-3">
-                      <button
-                        ref={el => { mandalaButtons.current[idx] = el }}
-                        data-mandalaval={mandala}
-                        role="treeitem"
-                        aria-expanded={isMandalaOpen}
-                        onKeyDown={e => onMandalaKeyDown(e, idx)}
-                        onClick={() => toggleMandala(mandala)}
-                        className="w-full flex items-center justify-between px-2 py-2 rounded hover:bg-vedic-accent/20 focus:outline-none focus:ring-2 focus:ring-accent"
-                      >
-                        <span className="text-sm font-semibold text-vedic-text">Mandala {mandala}</span>
-                        <span className="text-xs text-muted-foreground">{Array.from(sMap.keys()).length} suktas</span>
-                      </button>
+          {/* Sidebar */}
+          <motion.aside
+            initial={{ x: -320, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -320, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-vedic-ui/98 to-vedic-bg/98 backdrop-blur-xl border-r border-vedic-accent/30 shadow-2xl z-50 flex flex-col"
+          >
+            {/* Header with gradient and modern styling */}
+            <div className="px-6 py-5 border-b border-vedic-accent/20 bg-gradient-to-r from-accent/5 to-vedic-sage/5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-accent/10 border border-accent/20">
+                    <BookOpen className="w-5 h-5 text-accent" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-vedic-text">Rigveda</h2>
+                    <p className="text-xs text-muted-foreground">Index & Navigation</p>
+                  </div>
+                </div>
+                <button
+                  aria-label="Close sidebar"
+                  className={cn(
+                    "p-2 rounded-lg",
+                    "hover:bg-vedic-sage/20 hover:rotate-90",
+                    "transition-all duration-300",
+                    "focus:outline-none focus:ring-2 focus:ring-accent"
+                  )}
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <X className="w-5 h-5 text-vedic-text" />
+                </button>
+              </div>
+            </div>
 
-                      <AnimatePresence>
-                        {isMandalaOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="mt-2 pl-4"
-                            data-mandala={mandala}
-                          >
-                              {loadingMandala === mandala ? (
-                                <div className="py-4 text-center text-muted-foreground">Loading mandala…</div>
-                              ) : (
-                                Array.from(sMap.keys()).sort((a, b) => a - b).map(sukta => {
-                                  const versesList = sMap.get(sukta)!.sort((a, b) => a.verse - b.verse);
-                                  const isSuktaOpen = activeSukta?.mandala === mandala && activeSukta?.sukta === sukta;
-                                  return (
-                                    <div key={sukta} className="mb-2">
+          {/* Navigation content with custom scrollbar */}
+          <div className="flex-1 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-thumb-vedic-accent/30 scrollbar-track-transparent">
+            <nav role="tree" aria-label="Rigveda index">
+              {Array.from(tree.keys()).sort((a, b) => a - b).map((mandala, idx) => {
+                const sMap = tree.get(mandala)!;
+                const isMandalaOpen = activeMandala === mandala;
+                return (
+                  <div key={mandala} className="mb-2">
+                    <button
+                      ref={el => { mandalaButtons.current[idx] = el }}
+                      data-mandalaval={mandala}
+                      role="treeitem"
+                      aria-expanded={isMandalaOpen}
+                      onKeyDown={e => onMandalaKeyDown(e, idx)}
+                      onClick={() => toggleMandala(mandala)}
+                      className={cn(
+                        "w-full group flex items-center justify-between px-4 py-3 rounded-xl",
+                        "transition-all duration-200",
+                        "focus:outline-none focus:ring-2 focus:ring-accent",
+                        isMandalaOpen
+                          ? "bg-gradient-to-r from-accent/15 to-vedic-sage/15 border border-accent/30 shadow-sm"
+                          : "bg-vedic-ui/40 border border-vedic-accent/10 hover:bg-vedic-ui/60 hover:border-accent/20 hover:shadow-md"
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={cn(
+                          "p-1.5 rounded-lg transition-colors",
+                          isMandalaOpen ? "bg-accent/20" : "bg-vedic-sage/20 group-hover:bg-accent/15"
+                        )}>
+                          <Scroll className={cn(
+                            "w-4 h-4 transition-colors",
+                            isMandalaOpen ? "text-accent" : "text-vedic-text group-hover:text-accent"
+                          )} />
+                        </div>
+                        <span className={cn(
+                          "text-sm font-semibold transition-colors",
+                          isMandalaOpen ? "text-accent" : "text-vedic-text"
+                        )}>
+                          Mandala {mandala}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-muted-foreground bg-vedic-ui/60 px-2 py-0.5 rounded-full">
+                          {Array.from(sMap.keys()).length}
+                        </span>
+                        <ChevronRight className={cn(
+                          "w-4 h-4 transition-transform duration-200",
+                          isMandalaOpen ? "rotate-90 text-accent" : "text-muted-foreground"
+                        )} />
+                      </div>
+                    </button>
+
+                    <AnimatePresence>
+                      {isMandalaOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="mt-3 pl-3 space-y-1"
+                          data-mandala={mandala}
+                        >
+                          {loadingMandala === mandala ? (
+                            <div className="py-6 text-center">
+                              <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                                <div className="w-4 h-4 border-2 border-accent/30 border-t-accent rounded-full animate-spin" />
+                                Loading mandala…
+                              </div>
+                            </div>
+                          ) : (
+                            Array.from(sMap.keys()).sort((a, b) => a - b).map(sukta => {
+                              const versesList = sMap.get(sukta)!.sort((a, b) => a.verse - b.verse);
+                              const isSuktaOpen = activeSukta?.mandala === mandala && activeSukta?.sukta === sukta;
+                              return (
+                                <div key={sukta} className="mb-1.5">
                                   <button
                                     data-sukta={sukta}
                                     role="treeitem"
                                     aria-expanded={isSuktaOpen}
                                     onKeyDown={e => onSuktaKeyDown(e, mandala, sukta)}
                                     onClick={() => toggleSukta(mandala, sukta)}
-                                    className="w-full flex items-center justify-between text-sm text-muted-foreground px-2 py-1 rounded hover:bg-vedic-ui/10 focus:outline-none focus:ring-1 focus:ring-accent"
+                                    className={cn(
+                                      "w-full group flex items-center justify-between px-3 py-2 rounded-lg text-sm",
+                                      "transition-all duration-150",
+                                      "focus:outline-none focus:ring-1 focus:ring-accent",
+                                      isSuktaOpen
+                                        ? "bg-vedic-sage/20 border border-vedic-sage/30 text-vedic-text"
+                                        : "bg-transparent border border-transparent text-muted-foreground hover:bg-vedic-ui/30 hover:text-vedic-text hover:border-vedic-accent/10"
+                                    )}
                                   >
-                                    <span>Sukta {sukta}</span>
-                                    <span className="text-xs">{versesList.length} shlokas</span>
+                                    <div className="flex items-center gap-2">
+                                      <FileText className={cn(
+                                        "w-3.5 h-3.5 transition-colors",
+                                        isSuktaOpen ? "text-accent" : "text-muted-foreground/60 group-hover:text-vedic-text"
+                                      )} />
+                                      <span className="font-medium">Sukta {sukta}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                      <span className={cn(
+                                        "text-xs px-1.5 py-0.5 rounded",
+                                        isSuktaOpen ? "bg-accent/15 text-accent font-medium" : "text-muted-foreground/80"
+                                      )}>
+                                        {versesList.length}
+                                      </span>
+                                      <ChevronRight className={cn(
+                                        "w-3.5 h-3.5 transition-transform duration-150",
+                                        isSuktaOpen ? "rotate-90" : ""
+                                      )} />
+                                    </div>
                                   </button>
 
                                   <AnimatePresence>
@@ -294,20 +382,32 @@ const Sidebar: React.FC = () => {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.18 }}
-                                        className="pl-4 mt-2"
+                                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                                        className="pl-4 mt-2 space-y-1"
                                         role="group"
                                       >
                                         {versesList.map((v: VerseData) => (
-                                          <li key={v.id} className="mb-1">
+                                          <li key={v.id}>
                                             <Link
                                               id={`sidebar-verse-${v.id}`}
                                               to={`/explore#verse-${v.id}`}
                                               onKeyDown={onVerseKeyDown}
                                               onClick={() => setSidebarOpen(false)}
-                                              className="text-sm text-vedic-text hover:text-vedic-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                                              className={cn(
+                                                "flex items-center gap-2 px-3 py-2 rounded-md text-xs",
+                                                "transition-all duration-150",
+                                                "text-muted-foreground hover:text-vedic-text",
+                                                "hover:bg-vedic-ui/20 hover:pl-4",
+                                                "focus:outline-none focus:ring-1 focus:ring-accent focus:bg-vedic-ui/30",
+                                                "border-l-2 border-transparent hover:border-accent/50"
+                                              )}
                                             >
-                                              {v.id} — {v.metadata?.deity?.primary || ''}
+                                              <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
+                                              <span className="flex-1 truncate">
+                                                <span className="font-mono text-[11px] text-muted-foreground/60">{v.id}</span>
+                                                {' — '}
+                                                <span className="font-medium">{v.metadata?.deity?.primary || 'Unknown'}</span>
+                                              </span>
                                             </Link>
                                           </li>
                                         ))}
@@ -316,18 +416,18 @@ const Sidebar: React.FC = () => {
                                   </AnimatePresence>
                                 </div>
                               );
-                                })
-                              )}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </nav>
-            </div>
+                            })
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </nav>
           </div>
         </motion.aside>
+        </>
       )}
     </AnimatePresence>
   );

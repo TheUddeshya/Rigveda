@@ -2,13 +2,22 @@ import mandalaInfo from '../../data/mandalaInfo.json';
 
 interface MandalaCardProps {
   mandala: typeof mandalaInfo[0];
+  onSelect: (mandalaId: number) => void;
 }
 
-const MandalaCard = ({ mandala }: MandalaCardProps) => (
+const MandalaCard = ({ mandala, onSelect }: MandalaCardProps) => (
   <article
-    className="bg-vedic-ui/50 rounded-xl p-6 hover:bg-vedic-ui/70 transition-all duration-200 border border-vedic-ui/30 hover:border-accent/30"
+    className="bg-vedic-ui/50 rounded-xl p-6 hover:bg-vedic-ui/70 transition-all duration-200 border border-vedic-ui/30 hover:border-accent/30 cursor-pointer"
     role="listitem"
     aria-label={`Mandala ${mandala.id}: ${mandala.name}`}
+    onClick={() => onSelect(mandala.id)}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onSelect(mandala.id);
+      }
+    }}
+    tabIndex={0}
   >
     <div className="flex items-start justify-between mb-4">
       <h3 className="text-xl font-bold text-vedic-text">Mandala {mandala.id}</h3>
@@ -21,7 +30,7 @@ const MandalaCard = ({ mandala }: MandalaCardProps) => (
     <div className="flex items-center justify-between">
       <span className="text-sm text-vedic-text/80">Primary deity: {mandala.deity}</span>
       <button
-        className="text-accent hover:text-accent/80 font-medium text-sm"
+        className="text-accent hover:text-accent/80 font-medium text-sm pointer-events-none"
         aria-label={`Explore Mandala ${mandala.id}`}
       >
         Explore →

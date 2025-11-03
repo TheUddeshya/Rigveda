@@ -278,7 +278,7 @@ Create `.env.production`:
 
 ```bash
 # API Configuration (if using external API)
-VITE_API_URL=https://api.Rigveda.app
+VITE_API_URL=https://api.rigved.vercel.app
 
 # Analytics (optional)
 VITE_GA_ID=G-XXXXXXXXXX
@@ -309,17 +309,17 @@ No special environment variables required for basic deployment.
 **Automated Testing:**
 ```bash
 # Run Lighthouse audit
-npx lighthouse https://Rigveda.app --view
+npx lighthouse https://rigved.vercel.app --view
 
 # Check for broken links
-npx broken-link-checker https://Rigveda.app
+npx broken-link-checker https://rigved.vercel.app
 ```
 
 ### 2. Configure Custom Domain
 
 **Vercel:**
 ```bash
-vercel domains add Rigveda.app
+vercel domains add rigved.vercel.app
 ```
 
 **Netlify:**
@@ -334,7 +334,7 @@ Both Vercel and Netlify provide free SSL automatically via Let's Encrypt.
 For custom servers:
 ```bash
 # Using Certbot
-sudo certbot --nginx -d Rigveda.app
+sudo certbot --nginx -d rigved.vercel.app
 ```
 
 ### 4. DNS Configuration
@@ -357,7 +357,7 @@ CNAME www  your-site.netlify.app
 
 **Google Search Console:**
 1. Verify domain ownership
-2. Submit sitemap: `https://Rigveda.app/sitemap.xml`
+2. Submit sitemap: `https://rigved.vercel.app/sitemap.xml`
 3. Request indexing
 
 **Bing Webmaster Tools:**
@@ -502,7 +502,7 @@ npm run build
 
 If using external API, configure CORS headers on the API server:
 ```
-Access-Control-Allow-Origin: https://Rigveda.app
+Access-Control-Allow-Origin: https://rigved.vercel.app
 ```
 
 ---
@@ -583,7 +583,7 @@ Verify these targets are met:
 - Stack Overflow: Technical questions
 
 ### Contact
-- Email: support@Rigveda.app (update this)
+- Email: support@rigved.vercel.app (update this)
 - GitHub: https://github.com/your-org/Rigveda
 
 ---

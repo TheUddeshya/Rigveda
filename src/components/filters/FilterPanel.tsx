@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X, Filter } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 import type { VerseData } from '../../store/verseStore';
@@ -38,59 +38,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ allVerses, currentFilters, on
   );
 
   return (
-    <div className={cn(
-      "mb-6 md:mb-8 rounded-xl p-4 md:p-6",
-      "bg-card border border-vedic-accent/20 shadow-lg"
-    )}>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Filter size={20} className="text-accent" />
-          <h2 className="text-lg font-semibold text-foreground">Filters</h2>
-        </div>
-        {hasActiveFilters && (
-          <button
-            className={cn(
-              "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium",
-              "bg-accent/20 text-accent border border-accent/30",
-              "hover:bg-accent hover:text-accent-foreground",
-              "transition-all duration-200"
-            )}
-            type="button"
-            onClick={() => onFilterChange({})}
-            aria-label="Clear all filters"
-          >
-            <X size={16} />
-            <span>Clear all</span>
-          </button>
-        )}
-      </div>
-
-      {/* Search Bar */}
-      <div className="mb-4">
-        <label className="flex flex-col">
-          <span className="text-xs font-semibold text-muted-foreground mb-2">Search</span>
-          <div className="relative">
-            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              className={cn(
-                "w-full pl-10 pr-4 py-2.5 rounded-lg min-h-[44px]",
-                "bg-vedic-ui/30 text-foreground border border-vedic-accent/20",
-                "placeholder:text-muted-foreground",
-                "focus:outline-none focus:ring-2 focus:ring-ring focus:border-accent",
-                "transition-all duration-200"
-              )}
-              value={currentFilters.search || ''}
-              onChange={e => onFilterChange({ ...currentFilters, search: e.target.value })}
-              placeholder="Search verses, deities, keywords..."
-            />
-          </div>
-        </label>
-      </div>
-
-      {/* Filter Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div>
+      {/* Filter Grid - Compact */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-4">
         {/* Mandala filter */}
         <label className="flex flex-col">
           <span className="text-xs font-semibold text-muted-foreground mb-2">Mandala</span>
@@ -169,6 +119,26 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ allVerses, currentFilters, on
           </select>
         </label>
       </div>
+
+      {/* Clear all button */}
+      {hasActiveFilters && (
+        <div className="flex justify-end">
+          <button
+            className={cn(
+              "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium",
+              "bg-accent/20 text-accent border border-accent/30",
+              "hover:bg-accent hover:text-accent-foreground",
+              "transition-all duration-200"
+            )}
+            type="button"
+            onClick={() => onFilterChange({})}
+            aria-label="Clear all filters"
+          >
+            <X size={16} />
+            <span>Clear all</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

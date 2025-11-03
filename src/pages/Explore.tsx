@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { Search, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { cn } from '../lib/utils';
 import PageLayout from '../components/layout/PageLayout';
 import FilterPanel from '../components/filters/FilterPanel';
 import KeyboardShortcutsDialog from '../components/ui/KeyboardShortcutsDialog';
@@ -11,9 +13,12 @@ import type { VerseData } from '../store/verseStore';
 import SearchHistory from '../components/explore/SearchHistory';
 import ErrorState from '../components/explore/ErrorState';
 import MandalaGrid from '../components/explore/MandalaGrid';
+import SuktaGrid from '../components/explore/SuktaGrid';
 import VerseList from '../components/explore/VerseList';
 import VerseSkeleton from '../components/loading/VerseSkeleton';
 import FilterSkeleton from '../components/loading/FilterSkeleton';
+
+type ViewMode = 'mandalas' | 'suktas' | 'verses';
 
 interface Filters {
   mandala?: number;
@@ -28,6 +33,9 @@ interface Filters {
 const Explore = () => {
   const { verses, loading, error } = useVerses();
   const [currentFilters, setCurrentFilters] = useState<Filters>({});
+  const [viewMode, setViewMode] = useState<ViewMode>('mandalas');
+  const [selectedMandala, setSelectedMandala] = useState<number | null>(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   // When a single mandala is selected, we may lazily load just that mandala
   // to avoid requiring the entire dataset up-front.
@@ -56,9 +64,9 @@ const Explore = () => {
     }
   }, [currentFilters.search, setQuery]);
 
-  // Load a single mandala when the mandala filter changes
+  // Load a single mandala when selected
   useEffect(() => {
-    const m = currentFilters.mandala;
+    const m = selectedMandala || currentFilters.mandala;
     if (!m) {
       setMandalaVerses([]);
       setLoadingMandala(null);
@@ -75,7 +83,7 @@ const Explore = () => {
       if (mounted) setLoadingMandala(null);
     });
     return () => { mounted = false; };
-  }, [currentFilters.mandala]);
+  }, [selectedMandala, currentFilters.mandala]);
 
   // Memoize filtered verses calculation to avoid re-filtering on every render
   const filteredVerses = useMemo(() => {
@@ -94,6 +102,34 @@ const Explore = () => {
   // Memoize event handlers to prevent re-creating functions on every render
   const handleSearchHistoryClick = useCallback((searchItem: string) => {
     setCurrentFilters(prev => ({ ...prev, search: searchItem }));
+  }, []);
+
+  const handleMandalaSelect = useCallback((mandalaId: number) => {
+    setSelectedMandala(mandalaId);
+    setViewMode('suktas');
+  }, []);
+
+  const handleSuktaSelect = useCallback((suktaNumber: number) => {
+    setCurrentFilters(prev => ({
+      ...prev,
+      mandala: selectedMandala || undefined,
+      sukta: suktaNumber
+    }));
+    setViewMode('verses');
+  }, [selectedMandala]);
+
+  const handleBackToMandalas = useCallback(() => {
+    setSelectedMandala(null);
+    setViewMode('mandalas');
+    setCurrentFilters({});
+  }, []);
+
+  const handleBackToSuktas = useCallback(() => {
+    setViewMode('suktas');
+    setCurrentFilters(prev => {
+      const { sukta, ...rest } = prev;
+      return rest;
+    });
   }, []);
 
   // Keyboard navigation for verses - memoized to avoid recreation
@@ -171,51 +207,113 @@ const Explore = () => {
     },
   ]);
 
-  // Check if we should show mandala cards (no search performed) - memoized
-  const showMandalaCards = useMemo(
-    () => !currentFilters.search && results.length === 0 && filteredVerses.length === sourceAllVerses.length,
-    [currentFilters.search, results.length, filteredVerses.length, sourceAllVerses.length]
-  );
-
   return (
     <PageLayout>
       <KeyboardShortcutsDialog isOpen={showShortcuts} onClose={() => setShowShortcuts(false)} />
       <div className="min-h-screen bg-gradient-to-b from-vedic-ui via-vedic-bg to-vedic-ui py-8 px-4">
         <div className="max-w-6xl mx-auto">
+          {/* Search bar with integrated filter toggle - Always visible */}
+          <div className="mb-6">
+            <div className="relative">
+              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                className={cn(
+                  "w-full pl-10 pr-28 py-2.5 rounded-lg min-h-[44px]",
+                  "bg-vedic-ui/30 text-foreground border border-vedic-accent/20",
+                  "placeholder:text-muted-foreground",
+                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-accent",
+                  "transition-all duration-200"
+                )}
+                value={currentFilters.search || ''}
+                onChange={e => setCurrentFilters({ ...currentFilters, search: e.target.value })}
+                placeholder="Search verses, deities, keywords..."
+              />
+              {/* Filter toggle button - visible on all pages */}
+              <button
+                className={cn(
+                  "absolute right-2 top-1/2 -translate-y-1/2",
+                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium",
+                  "bg-vedic-sage/20 text-foreground border border-vedic-accent/20",
+                  "hover:bg-vedic-sage/30",
+                  "transition-all duration-200"
+                )}
+                type="button"
+                onClick={() => setShowFilters(!showFilters)}
+                aria-label={showFilters ? "Hide filters" : "Show filters"}
+              >
+                <Filter size={16} className="text-accent" />
+                <span>Filters</span>
+                {showFilters ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+            </div>
+
+            {/* Compact filters panel below search bar - visible on all pages when toggled */}
+            {showFilters && (
+              <div className="mt-3 p-4 rounded-lg bg-card/50 border border-vedic-accent/20">
+                {loading && !currentFilters.mandala ? (
+                  <FilterSkeleton />
+                ) : (
+                  <FilterPanel allVerses={sourceAllVerses} currentFilters={currentFilters} onFilterChange={setCurrentFilters} />
+                )}
+              </div>
+            )}
+          </div>
+
           <h1 className="text-3xl md:text-4xl font-reading mb-6 md:mb-8 font-bold text-vedic-text">Explore the Verses</h1>
 
-          {/* Show filter skeleton while loading initial data */}
-          {loading && !currentFilters.mandala ? (
-            <FilterSkeleton />
-          ) : (
-            <FilterPanel allVerses={sourceAllVerses} currentFilters={currentFilters} onFilterChange={setCurrentFilters} />
+          {/* Search history only in verses view */}
+          {viewMode === 'verses' && (
+            <SearchHistory
+              history={history}
+              onHistoryClick={handleSearchHistoryClick}
+              onClearHistory={clearHistory}
+            />
           )}
 
-          <SearchHistory
-            history={history}
-            onHistoryClick={handleSearchHistoryClick}
-            onClearHistory={clearHistory}
-          />
-
-          {( (loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala) ) && (
+          {( (loading && viewMode === 'mandalas') || (selectedMandala && loadingMandala === selectedMandala) ) && (
             <VerseSkeleton count={3} />
           )}
 
           {error && <ErrorState error={error} />}
 
-          {!((loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala)) && !error && (
+          {/* Mandala Grid View */}
+          {viewMode === 'mandalas' && !loading && !error && (
+            <MandalaGrid onMandalaSelect={handleMandalaSelect} />
+          )}
+
+          {/* Sukta Grid View */}
+          {viewMode === 'suktas' && selectedMandala && !loadingMandala && !error && (
+            <SuktaGrid
+              verses={mandalaVerses.length > 0 ? mandalaVerses : verses}
+              mandalaId={selectedMandala}
+              onSuktaSelect={handleSuktaSelect}
+              onBack={handleBackToMandalas}
+            />
+          )}
+
+          {/* Verse List View */}
+          {viewMode === 'verses' && !((loading && !currentFilters.mandala) || (currentFilters.mandala && loadingMandala === currentFilters.mandala)) && !error && (
             <>
-              {showMandalaCards ? (
-                <MandalaGrid />
-              ) : (
-                <VerseList
-                  verses={filteredVerses}
-                  sourceVerseCount={sourceAllVerses.length}
-                  verseRefs={verseRefs}
-                  onFocusVerse={setFocusedVerseIndex}
-                  onClearFilters={() => setCurrentFilters({})}
-                />
-              )}
+              <div className="mb-4">
+                <button
+                  onClick={handleBackToSuktas}
+                  className="text-accent hover:text-accent/80 font-medium flex items-center gap-2"
+                  aria-label="Back to Suktas"
+                >
+                  ← Back to Suktas
+                </button>
+              </div>
+              <VerseList
+                verses={filteredVerses}
+                sourceVerseCount={sourceAllVerses.length}
+                verseRefs={verseRefs}
+                onFocusVerse={setFocusedVerseIndex}
+                onClearFilters={() => {
+                  setCurrentFilters({});
+                  handleBackToSuktas();
+                }}
+              />
             </>
           )}
         </div>
