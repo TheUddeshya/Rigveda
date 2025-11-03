@@ -11,7 +11,6 @@ State: Zustand (lightweight, better than Redux for this scale)
 Data Viz: D3.js for custom visualizations, Recharts for standard charts
 Maps: Mapbox GL JS (beautiful, customizable)
 Search: Fuse.js (fuzzy search for verses)
-AI: Anthropic Claude API (for semantic understanding)
 Icons: Lucide React
 Fonts: Google Fonts CDN
 
@@ -756,7 +755,7 @@ src/components/visualizations/
 
 **Tasks:**
 - [ ] Design AI service architecture
-- [ ] Create API client for Anthropic Claude
+- [ ] Create API client for AI integration
 - [ ] Implement rate limiting
 - [ ] Add caching for AI responses
 - [ ] Create prompt templates
